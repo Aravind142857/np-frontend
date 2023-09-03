@@ -32,12 +32,12 @@ export default function Home({data,error}) {
       <div className='flex justify-between w-full bg-gray-600 my-8 self-center rounded-lg p-4'>
         <div className='text-white text-lg left-0 font-bold font-serif self-center'> {Object.keys(data).length} notes</div>
         <div className='self-center'>
-          <div className='rounded-full bg-white hover:bg-green-300 flex items-center justify-center p-2' onClick={()=>handleNewNote()}>
+          <div className='rounded-full bg-white hover:bg-green-300 flex items-center justify-center p-2'>
             <IoAddOutline size={24} color="black" className='self-center'/>
           </div>
         </div>
         <div className='self-center'>
-          <div className='rounded-full bg-white hover:bg-red-300 flex items-center justify-center p-2' onClick={()=>handleNewNote()}>
+          <div className='rounded-full bg-white hover:bg-red-300 flex items-center justify-center p-2'>
             <MdDelete size={24}  color="black" className='self-center'/>
           </div>
         </div>
