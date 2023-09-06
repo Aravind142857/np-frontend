@@ -33,7 +33,9 @@ export default function Home({data,error}) {
         <div className='xl:my-0 my-1 rounded-lg p-1 text-white text-lg left-0 bg-pink-600 selection:bg-black selection:text-white w-fit font-bold font-serif self-center text-center'> {Object.keys(data).length} notes</div>
         <div className='xl:my-0 my-1 self-center w-fit'>
           <div className='rounded-full bg-white hover:bg-green-300 flex items-center justify-center p-2'>
+            <a href='add'>
             <IoAddOutline size={24} color="black" className='self-center'/>
+            </a>
           </div>
         </div>
         <div className='xl:my-0 my-1 self-center w-fit'>
@@ -46,6 +48,7 @@ export default function Home({data,error}) {
           <input type='search' className='text-fuchsia-900 px-4 py-2 rounded-md focus:outline-none focus:outline-4 focus:outline-offset-0 focus:outline-fuchsia-500/80' placeholder='Search for a note'/>
         </span>
       </div>
+      
       {error&&<p>{JSON.stringify(error)}</p>}
       {data.map((element)=> <div key={element.slug} className='flex justify-center items-center mb-10'>
         <div className='bg-yellow-700 my-2 p-4 shadow-lg shadow-yellow-800 rounded-lg cursor-pointer w-[100%]' onClick={()=>handleNavigation(element)}>
