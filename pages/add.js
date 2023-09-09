@@ -14,6 +14,9 @@ function Add() {
     const returnToAdd = (e)=> {
         router.push('.add');
     };
+    const refreshData = () => {
+        router.replace(router.asPath);
+      }
     const handleOnSubmit = (e) => {
         e.preventDefault();
         const options = {
@@ -31,7 +34,7 @@ function Add() {
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/add`, options)
         .then(res=>res.json()).then(response=>{
             setIsSubmitted(true);
-            setInterval(returnToHome,4000);
+            setInterval(refreshData,4000);
         }).catch(error=>console.log('error', error)).finally(()=>{
             setIsSubmitting(false);
         })
