@@ -11,11 +11,11 @@ function Add() {
     const returnToHome = (e)=> {
         router.push('./');
     };
-    const returnToAdd = (e)=> {
-        router.push('.add');
+    const refreshDataAdd = (e)=> {
+        router.replace('.add');
     };
-    const refreshData = () => {
-        router.replace(router.asPath);
+    const refreshDataHome = () => {
+        router.replace('./');
       }
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -34,7 +34,7 @@ function Add() {
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/add`, options)
         .then(res=>res.json()).then(response=>{
             setIsSubmitted(true);
-            setInterval(refreshData,4000);
+            setInterval(refreshDataHome,4000);
         }).catch(error=>console.log('error', error)).finally(()=>{
             setIsSubmitting(false);
         })
@@ -65,13 +65,13 @@ function Add() {
         </div>
         <div className='py-2 flex flex-row items-center'>
             <input value={submitting?"Please wait":'Submit'} aria-disabled={submitting} type="submit" className='border-2 border-white p-1 m-1 mx-8 hover:bg-white hover:text-black'/>
-            <input value={submitting?"Please wait":"Cancel"} aria-disabled={submitting} type="button" className='border-2 border-white p-1 m-1 hover:bg-white hover:text-black' onClick={returnToHome} />
+            <input value={submitting?"Please wait":"Cancel"} aria-disabled={submitting} type="button" className='border-2 border-white p-1 m-1 hover:bg-white hover:text-black' onClick={refreshDataHome} />
         </div>
     </form>
     </>:<>
             <div className='w-full self-center mb-4'>
-                <button className='p-4 w-full mb-8 rounded-lg bg-blue-950 hover:bg-gray-700' onClick={returnToAdd}>Create a new note</button>
-                <button className='p-4 w-full rounded-lg bg-blue-950 hover:bg-gray-700' onClick={returnToHome}>Back to home</button>
+                <button className='p-4 w-full mb-8 rounded-lg bg-blue-950 hover:bg-gray-700' onClick={refreshDataAdd}>Create a new note</button>
+                <button className='p-4 w-full rounded-lg bg-blue-950 hover:bg-gray-700' onClick={refreshDataHome}>Back to home</button>
             </div>
             <h3 className='w-full self-center text-center text-xl'>You will be redirected in 4 seconds ...</h3>
     </>
