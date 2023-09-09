@@ -8,8 +8,11 @@ function Add() {
     let [submitting, setIsSubmitting] = useState(false);
     let [title, setTitle] = useState("");
     let [description, setDescription] = useState("");
-    const handleCancel = (e)=> {
+    const returnToHome = (e)=> {
         router.push('./');
+    };
+    const returnToAdd = (e)=> {
+        router.push('.add');
     };
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -28,6 +31,7 @@ function Add() {
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/add`, options)
         .then(res=>res.json()).then(response=>{
             setIsSubmitted(true);
+            setInterval(returnToHome,4000);
         }).catch(error=>console.log('error', error)).finally(()=>{
             setIsSubmitting(false);
         })
@@ -38,7 +42,9 @@ function Add() {
         <title>Create a note</title>
         <meta name='description' content={"Create a new note"}/>
     </Head>
-    <main className='px-[30%]'>
+    <main className='px-[30%] py-[5%]'>
+    {!submitted?
+    <>
     <h3 className='text-center text-4xl my-4'>Create a note </h3>
     <form onSubmit={handleOnSubmit} className='justify-center flex items-center border-2 border-white py-8 pl-2 pr-8 flex-col'>
         {/* {% csrf_token %} */}
@@ -55,10 +61,18 @@ function Add() {
                 setDescription(event.target.value)}}></textarea>
         </div>
         <div className='py-2 flex flex-row items-center'>
-            <input value={submitting?"Please wait":'Submit'} type="submit" className='border-2 border-white p-1 m-1 mx-8 hover:bg-white hover:text-black'/>
-            <input value="Cancel" type="button" className='border-2 border-white p-1 m-1 hover:bg-white hover:text-black' onClick={handleCancel} />
+            <input value={submitting?"Please wait":'Submit'} aria-disabled={submitting} type="submit" className='border-2 border-white p-1 m-1 mx-8 hover:bg-white hover:text-black'/>
+            <input value={submitting?"Please wait":"Cancel"} aria-disabled={submitting} type="button" className='border-2 border-white p-1 m-1 hover:bg-white hover:text-black' onClick={returnToHome} />
         </div>
     </form>
+    </>:<>
+            <div className='w-full self-center mb-4'>
+                <button className='p-4 w-full mb-8 rounded-lg bg-blue-950 hover:bg-gray-700' onClick={returnToAdd}>Create a new note</button>
+                <button className='p-4 w-full rounded-lg bg-blue-950 hover:bg-gray-700' onClick={returnToHome}>Back to home</button>
+            </div>
+            <h3 className='w-full self-center text-center text-xl'>You will be redirected in 4 seconds ...</h3>
+    </>
+    }
     </main>
 </>)
 }
