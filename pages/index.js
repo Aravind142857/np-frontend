@@ -12,7 +12,7 @@ import { FaDivide } from 'react-icons/fa'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({data,error}) {
+function Home({data,error}) {
 
   const router = useRouter()
   useEffect(()=>{
@@ -84,6 +84,7 @@ export async function getStaticProps(){
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/notes`);
     data = await response.json();
+    console.log("updated with ", data.length, "notes");
     
 }
 catch(err) {
@@ -102,3 +103,4 @@ return {
   }
 }
 }
+export default Home;

@@ -12,7 +12,7 @@ function Add() {
         router.push('./');
     };
     const refreshDataAdd = (e)=> {
-        router.replace('.add');
+        router.replace(router.asPath);
     };
     const refreshDataHome = () => {
         router.replace('./');
